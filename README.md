@@ -62,7 +62,7 @@ This system extends the DiLAC (Dictionnaire de la Langue Arabe Contemporaine) le
 
 ```bash
 # Clone repository
-git clone https://github.com/[your-repo]/dilac-hybrid.git
+git clone https://github.com/dilekht/dilac-hybrid.git
 cd dilac-hybrid
 
 # Install core dependencies
@@ -138,7 +138,7 @@ for method, result in comparison.items():
 
 ```python
 # Disambiguate all words in a text
-text = "ذهب الرجل إلى البنك ليسحب المال ثم جلس على ضفة النهر"
+text = "ذهب الرجل إلى طبيب العيون بعدها زار مكان جميل حيث عيون الماء"
 
 results = wsd.disambiguate_text(
     text,
@@ -237,7 +237,7 @@ from dilac import HybridWSDEvaluator
 
 # Prepare test data
 test_data = [
-    {'word': 'بنك', 'context': '...', 'correct_sense_id': 'sense_1'},
+    {'word': 'عين', 'context': '...', 'correct_sense_id': 'sense_1'},
     # ...
 ]
 
@@ -298,7 +298,7 @@ If you use this system, please cite:
 @article{dilac2026hybrid,
   title={DiLAC: A Comprehensive Arabic Lexical Resource for Semantic 
          Similarity and Word Sense Disambiguation},
-  author={[Authors]},
+  author={Tahar Dilekh},
   journal={ACM Transactions on Asian and Low-Resource Language 
            Information Processing},
   year={2026}
