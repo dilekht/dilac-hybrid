@@ -1,0 +1,33 @@
+# DiLAC Hybrid WSD System Requirements
+# =====================================
+
+# Core dependencies
+numpy>=1.20.0
+scipy>=1.7.0
+
+# Transformer dependencies (for hybrid WSD)
+transformers>=4.20.0
+torch>=1.10.0
+datasets>=2.0.0
+
+# Optional: GPU support
+# Install PyTorch with CUDA support separately:
+# pip install torch --index-url https://download.pytorch.org/whl/cu118
+
+# Development dependencies
+pytest>=7.0.0
+black>=22.0.0
+flake8>=5.0.0
+mypy>=0.990
+
+# Documentation
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.0.0
+
+# Jupyter notebooks
+jupyter>=1.0.0
+ipywidgets>=8.0.0
+
+# Arabic NLP utilities (optional)
+# camel-tools>=1.5.0  # For advanced Arabic preprocessing
+# pyarabic>=0.6.0     # Arabic text utilities
