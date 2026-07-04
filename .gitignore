@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+*.synctex.gz
+.DS_Store
+/kaggle/
+*.pt
+glossbert_models/

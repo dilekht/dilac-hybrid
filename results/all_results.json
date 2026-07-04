@@ -1,0 +1,192 @@
+{
+  "description": "All final verified results for DiLAC Hybrid WSD. Single source of truth for figures and tables.",
+  "track1_knowledge_based": {
+    "sense_identification": {
+      "task": "57-class sense identification, AWSS subset, 1425 instances, leave-one-out",
+      "random_baseline": 1.75,
+      "configurations": {
+        "Baseline (binary)": {
+          "acc": 52.21,
+          "prec": 52.23,
+          "rec": 52.21,
+          "f1": 51.59
+        },
+        "Gloss Priority (x3)": {
+          "acc": 87.44,
+          "prec": 88.13,
+          "rec": 87.44,
+          "f1": 87.45
+        },
+        "Frequency Weighting": {
+          "acc": 88.07,
+          "prec": 88.62,
+          "rec": 88.07,
+          "f1": 88.09
+        },
+        "Combined": {
+          "acc": 87.44,
+          "prec": 88.13,
+          "rec": 87.44,
+          "f1": 87.45
+        },
+        "Discriminative IDF + Combined": {
+          "acc": 89.89,
+          "prec": 90.5,
+          "rec": 89.89,
+          "f1": 89.67
+        }
+      },
+      "best_config": "Discriminative IDF + Combined"
+    },
+    "awss_similarity": {
+      "task": "35-pair AWSS Table II benchmark, no stemming, binary config",
+      "human_ceiling": 0.893,
+      "awss_algorithm_paper": 0.894,
+      "awss_algorithm_reproduced": 0.894,
+      "dilac_leskar_vs_human": 0.867,
+      "dilac_leskar_vs_machine": 0.753,
+      "subbands": {
+        "low_13": 0.705,
+        "medium_6": 0.588,
+        "high_16": 0.566
+      }
+    },
+    "stemming_study": {
+      "with_stemming": {
+        "senseid_acc": 47.86,
+        "awss_r": 0.854
+      },
+      "without_stemming": {
+        "senseid_acc": 52.28,
+        "awss_r": 0.867
+      }
+    }
+  },
+  "track2_wsd_pipeline": {
+    "dataset": {
+      "train_instances": 9842,
+      "dev_instances": 2018,
+      "test_instances": 2050,
+      "test_lemmas": 55,
+      "avg_senses_test": 4.4,
+      "max_senses": 15,
+      "leakage": "zero (word-level split, verified)"
+    },
+    "main_results": {
+      "MFS baseline": {
+        "acc": 28.49,
+        "f1": 14.35
+      },
+      "DiLAC Lesk-ar": {
+        "acc": 34.78,
+        "f1": 34.91
+      },
+      "AraBERT zero-shot": {
+        "acc": 41.37,
+        "f1": 35.36
+      },
+      "CAMeLBERT zero-shot": {
+        "acc": 50.39,
+        "f1": 46.0
+      },
+      "CAMeLBERT GlossBERT": {
+        "acc": 69.56,
+        "f1": 66.28
+      },
+      "Two-Stage (k=3)": {
+        "acc": 62.73,
+        "f1": 59.35
+      },
+      "Two-model BERT ensemble": {
+        "acc": 69.32,
+        "f1": 66.86
+      },
+      "Fusion (best)": {
+        "acc": 69.56,
+        "f1": 66.28
+      },
+      "AraBERT GlossBERT": {
+        "acc": 59.51,
+        "f1": 55.79
+      }
+    },
+    "ablation": {
+      "Full system": {
+        "acc": 69.56,
+        "delta": 0.0
+      },
+      "- Domain labels": {
+        "acc": 69.56,
+        "delta": 0.0
+      },
+      "- Runtime Lesk-ar": {
+        "acc": 69.56,
+        "delta": 0.0
+      },
+      "- Two-stage filter": {
+        "acc": 69.56,
+        "delta": 0.0
+      },
+      "- BERT embeddings": {
+        "acc": 8.24,
+        "delta": -61.3
+      }
+    },
+    "headline": {
+      "zero_shot_to_finetuned_gain": 19.17,
+      "best_system_acc": 69.56,
+      "note": "Zero-shot CAMeLBERT 50.39 -> fine-tuned 69.56 on identical v2 test set (+19.17pp). Best fusion weights alpha=0.0,beta=0.4,gamma=0.0 => lexical & domain contribute nothing at runtime; fusion equals scaled GlossBERT."
+    },
+    "per_band": {
+      "overall_acc_thisrun": 69.17,
+      "note": "Per-band accuracy measured on the test set. Relationship is non-monotonic: the 2-sense band is hardest.",
+      "bands": {
+        "2": {
+          "n": 181,
+          "acc": 55.8,
+          "macro_f1": 47.5,
+          "share": 8.8
+        },
+        "3": {
+          "n": 677,
+          "acc": 74.6,
+          "macro_f1": 71.9,
+          "share": 33.0
+        },
+        "4": {
+          "n": 470,
+          "acc": 73.0,
+          "macro_f1": 71.2,
+          "share": 22.9
+        },
+        "5-6": {
+          "n": 557,
+          "acc": 64.1,
+          "macro_f1": 60.9,
+          "share": 27.2
+        },
+        "7+": {
+          "n": 165,
+          "acc": 67.9,
+          "macro_f1": 65.3,
+          "share": 8.0
+        }
+      }
+    },
+    "_provenance": {
+      "MFS": "Test-internal MFS (per-lemma majority sense within the evaluation set). Required because the word-level split has zero train/test lemma overlap. Locked value: 28.49% acc / 14.35% macro-F1.",
+      "status": "LOCKED: all rows from one Kaggle session on v2 splits (2050 test). MFS/Lesk-ar live-computed; step8 printout shows stale hardcoded MFS/Lesk which are superseded by 28.49/34.78."
+    },
+    "fusion_weights": {
+      "alpha": 0.0,
+      "beta": 0.4,
+      "gamma": 0.0,
+      "search": "grid alpha in {0..0.6}, beta in {0.4..1.0}, gamma in {0..0.2}; selected on dev"
+    },
+    "two_stage_sweep": {
+      "k2": 54.49,
+      "k3": 62.73,
+      "k5": 68.39
+    }
+  }
+}
